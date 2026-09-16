@@ -117,7 +117,7 @@ public class Login {
             return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
         }
 
-        // STEP 2 Check if password is valid by password complexity validation to Login class
+        // STEP 2 Check if password is valid password complexity validation to login class
         if (!checkPasswordComplexity(password)) {
             return "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
         }
