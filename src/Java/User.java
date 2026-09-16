@@ -8,6 +8,8 @@ package Java;
  *
  * @author user
  */
+//Add User data class for storing registration details
+
 public class User {
     private String username;
     private String password;
