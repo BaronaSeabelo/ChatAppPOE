@@ -77,7 +77,7 @@ public class ChatApp {
         System.out.println("========================================");
         System.out.println();
 
-        // --- Username: validate immediately, loop until valid ---
+        
         String username;
         do {
             System.out.print("Enter username: ");
@@ -91,7 +91,7 @@ public class ChatApp {
 
         System.out.println();
 
-        // --- Password: validate immediately, loop until valid ---
+        //Password validate immediately, loop until valid
         String password;
         do {
             System.out.print("Enter password: ");
@@ -105,7 +105,7 @@ public class ChatApp {
 
         System.out.println();
 
-        // Phone number: validate immediately, loop until the input is  valid 
+        // Phone number validate immediately, loop until the input is  valid 
         String phoneNumber;
         do {
             System.out.print("Enter cell phone number: ");
@@ -129,8 +129,7 @@ public class ChatApp {
         System.out.println();
         System.out.println("----------------------------------------");
 
-        // At this point every field has already passed validation,
-        // so this call will always succeed and return the welcome message.
+        
         String result = login.registerUser(username, password, phoneNumber,
                                            firstName, lastName);
 

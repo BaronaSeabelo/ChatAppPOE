@@ -39,10 +39,10 @@ public class Login {
             return false;
         }
 
-        // Condition 1: Contains underscore?
+        // Condition 1 Contains underscore?
         boolean hasUnderscore = username.contains("_");
 
-        // Condition 2: Length is 5 or less?
+        // Condition 2 Length is 5 or less?
         boolean isShortEnough = username.length() <= 5;
 
         // BOTH conditions must be true
@@ -55,10 +55,10 @@ public class Login {
             return false;
         }
 
-        // Condition 1: At least 8 characters
+        // Condition 1 At least 8 characters
         boolean isLongEnough = password.length() >= 8;
 
-        // Condition 2: Contains atleast one capital letter (A-Z)
+        // Condition 2 Contains atleast one capital letter (A-Z)
         boolean hasCapital = false;
         for (int i = 0; i < password.length(); i++) {
             char c = password.charAt(i);
@@ -68,7 +68,7 @@ public class Login {
             }
         }
 
-        // Condition 3: Contains a number (0-9)
+        // Condition 3 Contains a number (0-9)
         boolean hasNumber = false;
         for (int i = 0; i < password.length(); i++) {
             char c = password.charAt(i);
@@ -78,7 +78,7 @@ public class Login {
             }
         }
 
-        // Condition 4: Contains a special character
+        // Condition 4 Contains a special character
         boolean hasSpecial = false;
         String specialCharacters = "!@#$%^&*()_+-=[]{};:'\"\\|,<.>/?";
         for (int i = 0; i < password.length(); i++) {
@@ -111,25 +111,25 @@ public class Login {
     public String registerUser(String username, String password,
                                String phoneNumber, String firstName,
                                String lastName) {
-        // STEP 1: Check if username is valid
+        // STEP 1 Check if username is valid
         if (!checkUserName(username)) {
             return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
         }
 
-        // STEP 2: Check if password is valid
+        // STEP 2 Check if password is valid
         if (!checkPasswordComplexity(password)) {
             return "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
         }
 
-        // STEP 3: Check if phone number is valid
+        // STEP 3 Check if phone number is valid
         if (!checkCellPhoneNumber(phoneNumber)) {
             return "Cell phone number incorrectly formatted or does not contain international code.";
         }
 
-        // STEP 4: ALL valid - create and store the User object
+        // STEP 4 ALL valid - create and store the User object
         this.registeredUser = new User(username, password, phoneNumber, firstName, lastName);
 
-        // STEP 5: Return success message
+        // STEP 5 Return success message
         return "Welcome " + firstName + " " + lastName + " it is great to see you.";
     }
 

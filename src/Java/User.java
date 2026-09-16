@@ -24,7 +24,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    // ===== Getters =====
+  
     public String getUsername() {
         return username;
     }
@@ -45,7 +45,7 @@ public class User {
         return lastName;
     }
 
-    // ===== Setters =====
+   
     public void setUsername(String username) {
         this.username = username;
     }

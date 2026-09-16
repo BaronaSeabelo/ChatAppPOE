@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
 package JUnitTest;
 
@@ -8,6 +8,10 @@ import Java.Login;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ *
+ * @author user
+ */
 public class TestLogin {
 
     private Login login = new Login();
