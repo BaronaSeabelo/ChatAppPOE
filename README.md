@@ -22,7 +22,22 @@ A console-based chat application built in Java that allows users to register an 
 
 ## 📂 Project Structure
 
-
+ChatAppPOE/
+├── nbproject/              ← NetBeans project files
+│   ├── build-impl.xml
+│   ├── genfiles.properties
+│   ├── project.properties
+│   └── project.xml
+├── src/Java/               ← My source code
+│   ├── ChatApp.java
+│   ├── Login.java
+│   └── User.java
+├── test/JUnitTest/         ← My unit tests
+│   └── TestLogin.java
+├── .gitignore
+├── README.md               
+├── build.xml
+└── manifest.mf
 
 ## ✨ Features
 
@@ -47,3 +62,4 @@ Right-click the project in NetBeans and select **Test**.
 ## 📝 Disclaimer
 
 AI was used to further elaborate and explain some concepts, and to support with debugging. However, the overall logic built is primarily my own work.
+In my word document I reference my sources 
