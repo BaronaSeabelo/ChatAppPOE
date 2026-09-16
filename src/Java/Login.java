@@ -111,7 +111,8 @@ public class Login {
     public String registerUser(String username, String password,
                                String phoneNumber, String firstName,
                                String lastName) {
-        // STEP 1 Check if username is valid
+       
+        // STEP 1 Check if username is valid Add username validation logic to Login class
         if (!checkUserName(username)) {
             return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
         }

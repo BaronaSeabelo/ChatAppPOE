@@ -119,7 +119,7 @@ public class ChatApp {
 
         System.out.println();
 
-        //First and last name no rules on he formating of the names 
+        //first and last name no rules on he formating of the names 
         System.out.print("Enter your first name: ");
         String firstName = scanner.nextLine();
 
