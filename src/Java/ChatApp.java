@@ -77,7 +77,7 @@ public class ChatApp {
         System.out.println("========================================");
         System.out.println();
 
-        
+
         String username;
         do {
             System.out.print("Enter username: ");
@@ -129,7 +129,7 @@ public class ChatApp {
         System.out.println();
         System.out.println("----------------------------------------");
 
-        
+
         String result = login.registerUser(username, password, phoneNumber,
                                            firstName, lastName);
 
@@ -185,12 +185,113 @@ public class ChatApp {
                                " it is great to see you.");
             System.out.println();
             System.out.println("Login successful! You are now logged in.");
+            System.out.println();
+            System.out.println("----------------------------------------");
+            System.out.println();
+
+            // STEP 3: once logged in, hand off to the QuickChat messaging menu
+            quickChatMenu();
         } else {
             System.out.println("Username or password incorrect, please try again.");
+            System.out.println();
+            System.out.println("----------------------------------------");
+            System.out.println();
         }
-       
-        // meant to organise and make the dispaly neater perosnal reasons 
+    }
+
+    // ============================================
+    // STEP 3: QuickChat messaging menu (after login)
+    // ============================================
+    public void quickChatMenu() {
+        System.out.println("========================================");
+        System.out.println("Welcome to QuickChat.");
+        System.out.println("========================================");
         System.out.println();
+
+        int choice = 0;
+
+        // Keep showing the QuickChat menu until the user chooses Quit
+        while (choice != 3) {
+            System.out.println("1) Send Messages");
+            System.out.println("2) Show recently sent messages");
+            System.out.println("3) Quit");
+            System.out.println("========================================");
+
+            choice = getIntInput("Enter your choice: ");
+
+            switch (choice) {
+                case 1:
+                    sendMessages();
+                    break;
+                case 2:
+                    System.out.println();
+                    System.out.println("Coming Soon.");
+                    System.out.println();
+                    break;
+                case 3:
+                    System.out.println();
+                    System.out.println("Exiting QuickChat. Goodbye!");
+                    System.out.println();
+                    break;
+                default:
+                    System.out.println();
+                    System.out.println("Invalid choice! Please enter 1, 2, or 3.");
+                    System.out.println();
+            }
+        }
+    }
+
+    // Asks how many messages to send, then loops that many times
+    // letting the user enter and process each message.
+    private void sendMessages() {
+        System.out.println();
+        int numMessages = getIntInput("How many messages would you like to send? ");
+        System.out.println();
+
+        // for loop: enter exactly numMessages messages
+        for (int i = 0; i < numMessages; i++) {
+            System.out.println("----------------------------------------");
+            System.out.println("Message " + (i + 1) + " of " + numMessages);
+            System.out.println("----------------------------------------");
+
+            System.out.print("Enter recipient cell number (with international code): ");
+            String recipient = scanner.nextLine();
+
+            System.out.print("Enter your message: ");
+            String messageText = scanner.nextLine();
+
+            Message message = new Message(recipient, messageText);
+
+            // Validate recipient cell number
+            String cellResult = message.checkRecipientCell();
+            System.out.println(cellResult);
+
+            // Validate message length
+            String lengthResult = message.checkMessageLength();
+            System.out.println(lengthResult);
+
+            if (!cellResult.equals("Cell phone number successfully captured.")
+                    || lengthResult.startsWith("Please enter")) {
+                System.out.println("Message was not processed due to the error above.");
+                System.out.println();
+                continue;
+            }
+
+            // Ask what to do with the message
+            System.out.println();
+            System.out.println("What would you like to do with this message?");
+            System.out.println("1) Send Message");
+            System.out.println("2) Disregard Message");
+            System.out.println("3) Store Message to send later");
+            int sendChoice = getIntInput("Enter your choice: ");
+
+            String outcome = message.SentMessage(sendChoice);
+            System.out.println(outcome);
+            System.out.println();
+        }
+
+        System.out.println("----------------------------------------");
+        System.out.println("Finished sending messages.");
         System.out.println("----------------------------------------");
         System.out.println();
     }
@@ -214,3 +315,4 @@ public class ChatApp {
         return number;
     }
 }
+
