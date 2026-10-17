@@ -49,14 +49,19 @@ public class Message {
     
     // METHOD 1 checkMessageID()
     
-    /* Checks if the message ID is not more than 10 characters.
-     //@return true if valid, false otherwise
-    // public boolean checkMessageID() {
+    /**
+     *Checks if the message ID is not more than 10 characters.
+     *@return true if valid, false otherwise
+     */
+    
+    public boolean checkMessageID() {
         if (messageID == null || messageID.isEmpty()) {
             return false;
         }
         return messageID.length() <= 10;
     }
+    
+    
     // METHOD 2: checkRecipientCell()
     /**
      * Validates the recipient cell number.
@@ -271,9 +276,8 @@ public class Message {
         return totalMessagesSent;
     }
 
-    // ============================================
+
     // SETTERS
-    // ============================================
     public void setRecipient(String recipient) {
         this.recipient = recipient;
     }
