@@ -18,9 +18,8 @@ import java.util.Random;
  * @since 2026
  */
 public class Message {
-    // ============================================
     // INSTANCE VARIABLES
-    // ============================================
+    
     private String messageID;          // 10-digit unique ID
     private int messageNumber;         // Position of this message (0, 1, 2...)
     private String recipient;          // Cell number
@@ -31,9 +30,8 @@ public class Message {
     private static int totalMessagesSent = 0;
     private static ArrayList<Message> allMessages = new ArrayList<>();
 
-    // ============================================
-    // CONSTRUCTOR
-    // ============================================
+    
+    
     /**
      * Creates a new Message with auto-generated ID and hash.
      * 
@@ -48,24 +46,18 @@ public class Message {
         this.messageHash = createMessageHash();
     }
 
-    // ============================================
-    // METHOD 1: checkMessageID()
-    // ============================================
-    /**
-     * Checks if the message ID is not more than 10 characters.
-     * 
-     * @return true if valid, false otherwise
-     */
-    public boolean checkMessageID() {
+    
+    // METHOD 1 checkMessageID()
+    
+    /* Checks if the message ID is not more than 10 characters.
+     //@return true if valid, false otherwise
+    // public boolean checkMessageID() {
         if (messageID == null || messageID.isEmpty()) {
             return false;
         }
         return messageID.length() <= 10;
     }
-
-    // ============================================
     // METHOD 2: checkRecipientCell()
-    // ============================================
     /**
      * Validates the recipient cell number.
      * Must be no more than 10 characters and start with international code.
@@ -91,14 +83,13 @@ public class Message {
         }
     }
 
-    // ============================================
     // METHOD 2b: checkMessageLength()
-    // ============================================
     /**
      * Validates that the message text is no longer than 250 characters.
      *
      * @return "Message sent" if valid, or an error message if too long
      */
+    
     public String checkMessageLength() {
         if (messageText == null) {
             return "Please enter a message of less than 250 characters.";
@@ -109,9 +100,7 @@ public class Message {
         return "Message sent";
     }
 
-    // ============================================
     // METHOD 3: createMessageHash()
-    // ============================================
     /**
      * Creates the message hash in format: 00:0:HITHANKS
      * - First 2 digits of Message ID
@@ -145,9 +134,7 @@ public class Message {
         return firstTwo + ":" + messageNumber + ":" + firstWord + lastWord;
     }
 
-    // ============================================
     // METHOD 4: SentMessage()
-    // ============================================
     /**
      * Allows the user to choose what to do with the message.
      * 
@@ -170,14 +157,13 @@ public class Message {
         }
     }
 
-    // ============================================
     // METHOD 5: printMessages()
-    // ============================================
     /**
      * Returns all messages sent while the program is running.
      * 
      * @return A string containing all message details
      */
+    
     public String printMessages() {
         if (allMessages.isEmpty()) {
             return "No messages sent yet.";
@@ -194,9 +180,8 @@ public class Message {
         return sb.toString();
     }
 
-    // ============================================
+    
     // METHOD 6: returnTotalMessagess()
-    // ============================================
     /**
      * Returns the total number of messages sent.
      * 
@@ -206,9 +191,7 @@ public class Message {
         return totalMessagesSent;
     }
 
-    // ============================================
     // METHOD 7: storeMessage() - Manual JSON
-    // ============================================
     /**
      * Stores the current message to a JSON file.
      * Uses manual string building (no external libraries).
@@ -238,9 +221,7 @@ public class Message {
         }
     }
 
-    // ============================================
     // HELPER: Generate Message ID
-    // ============================================
     /**
      * Generates a random 10-digit message ID.
      * @return The generated ID
@@ -255,9 +236,7 @@ public class Message {
         return id.toString();
     }
 
-    // ============================================
-    // HELPER: Escape JSON special characters
-    // ============================================
+    // HELPER Escape JSON special characters
     /**
      * Escapes quotes and backslashes for JSON output.
      * @param text The string to escape
@@ -267,9 +246,7 @@ public class Message {
         return text.replace("\\", "\\\\").replace("\"", "\\\"");
     }
 
-    // ============================================
     // GETTERS
-    // ============================================
     public String getMessageID() {
         return messageID;
     }
