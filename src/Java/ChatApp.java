@@ -189,7 +189,6 @@ public class ChatApp {
             System.out.println("----------------------------------------");
             System.out.println();
 
-            // STEP 3: once logged in, hand off to the QuickChat messaging menu
             quickChatMenu();
         } else {
             System.out.println("Username or password incorrect, please try again.");
@@ -199,9 +198,8 @@ public class ChatApp {
         }
     }
 
-    // ============================================
+    
     // STEP 3: QuickChat messaging menu (after login)
-    // ============================================
     public void quickChatMenu() {
         System.out.println("========================================");
         System.out.println("Welcome to QuickChat.");
@@ -269,7 +267,7 @@ public class ChatApp {
             }
         }
 
-        // Message: loop until 250 characters or fewer
+        // Message loop until 250 characters or fewer
         String messageText = "";
         boolean validMessage = false;
         while (!validMessage) {
