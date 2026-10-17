@@ -244,75 +244,69 @@ public class ChatApp {
     // Asks how many messages to send, then loops that many times
     // letting the user enter and process each message.
     private void sendMessages() {
-        System.out.println();
-        int numMessages = getIntInput("How many messages would you like to send? ");
-        System.out.println();
+    System.out.println();
+    int numMessages = getIntInput("How many messages would you like to send? ");
+    System.out.println();
 
-        // for loop: enter exactly numMessages messages
-        for (int i = 0; i < numMessages; i++) {
-            System.out.println("----------------------------------------");
-            System.out.println("Message " + (i + 1) + " of " + numMessages);
-            System.out.println("----------------------------------------");
+    for (int i = 0; i < numMessages; i++) {
+        System.out.println("----------------------------------------");
+        System.out.println("Message " + (i + 1) + " of " + numMessages);
+        System.out.println("----------------------------------------");
 
-            System.out.print("Enter recipient cell number (with international code): ");
-            String recipient = scanner.nextLine();
+        // Recipient: loop until valid
+        String recipient = "";
+        boolean validRecipient = false;
+        while (!validRecipient) {
+            System.out.print("Enter recipient cell number (international code): ");
+            recipient = scanner.nextLine();
 
-            System.out.print("Enter your message: ");
-            String messageText = scanner.nextLine();
+            Message temp = new Message(recipient, "test");
+            String check = temp.checkRecipientCell();
+            System.out.println(check);
 
-            Message message = new Message(recipient, messageText);
-
-            // Validate recipient cell number
-            String cellResult = message.checkRecipientCell();
-            System.out.println(cellResult);
-
-            // Validate message length
-            String lengthResult = message.checkMessageLength();
-            System.out.println(lengthResult);
-
-            if (!cellResult.equals("Cell phone number successfully captured.")
-                    || lengthResult.startsWith("Please enter")) {
-                System.out.println("Message was not processed due to the error above.");
-                System.out.println();
-                continue;
+            if (check.equals("Cell phone number successfully captured.")) {
+                validRecipient = true;
             }
-
-            // Ask what to do with the message
-            System.out.println();
-            System.out.println("What would you like to do with this message?");
-            System.out.println("1) Send Message");
-            System.out.println("2) Disregard Message");
-            System.out.println("3) Store Message to send later");
-            int sendChoice = getIntInput("Enter your choice: ");
-
-            String outcome = message.SentMessage(sendChoice);
-            System.out.println(outcome);
-            System.out.println();
         }
 
-        System.out.println("----------------------------------------");
-        System.out.println("Finished sending messages.");
-        System.out.println("----------------------------------------");
+        // Message: loop until 250 characters or fewer
+        String messageText = "";
+        boolean validMessage = false;
+        while (!validMessage) {
+            System.out.print("Enter message (max 250 characters): ");
+            messageText = scanner.nextLine();
+
+            if (messageText.length() <= 250) {
+                validMessage = true;
+                System.out.println("Message sent");
+            } else {
+                System.out.println("Please enter a message of less than 250 characters.");
+            }
+        }
+
+        // Constructor auto-generates the ID and hash
+        Message message = new Message(recipient, messageText);
+
+        System.out.println();
+        System.out.println("Message ID: " + message.getMessageID());
+        System.out.println("Message Hash: " + message.getMessageHash());
+        System.out.println("Recipient: " + message.getRecipient());
+        System.out.println("Message: " + message.getMessageText());
+        System.out.println();
+
+        System.out.println("1) Send Message");
+        System.out.println("2) Disregard Message");
+        System.out.println("3) Store Message to send later");
+        int action = getIntInput("Choose an option: ");
+
+        System.out.println(message.SentMessage(action));
         System.out.println();
     }
 
-    private int getIntInput(String prompt) {
-        int number = 0;
-        boolean valid = false;
-
-        while (!valid) {
-            System.out.print(prompt);
-            String input = scanner.nextLine();
-
-            try {
-                number = Integer.parseInt(input);
-                valid = true;
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input! Please enter a number.");
-            }
-        }
-
-        return number;
+    System.out.println("----------------------------------------");
+    System.out.println("Total messages sent: " + Message.getTotalMessagesSent());
+    System.out.println("----------------------------------------");
+    System.out.println();
     }
 }
 
