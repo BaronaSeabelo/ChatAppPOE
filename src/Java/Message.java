@@ -5,7 +5,6 @@
 package Java;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 import org.json.simple.JSONObject;
@@ -236,16 +235,6 @@ public class Message {
             id.append(random.nextInt(10));
         }
         return id.toString();
-    }
-
-    // HELPER Escape JSON special characters
-    /**
-     * Escapes quotes and backslashes for JSON output.
-     * @param text The string to escape
-     * @return The escaped string
-     */
-    private String escapeJson(String text) {
-        return text.replace("\\", "\\\\").replace("\"", "\\\"");
     }
 
     // GETTERS
