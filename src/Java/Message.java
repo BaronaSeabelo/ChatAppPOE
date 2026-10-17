@@ -197,13 +197,15 @@ public class Message {
         return totalMessagesSent;
     }
 
+
         // METHOD 7: storeMessage() - JSON
     /**
-     * Stores the current message to messages.json using json-simple.
+     * Stores the current message to messages.json using the json-simple library.
      *
-     * SOURCE: json-simple 1.1 library (org.json.simple.JSONObject)
-     * Add your real source here (e.g. tutor session, documentation) and the date.
+     * SOURCE: json-simple 1.1 library (org.json.simple.JSONObject),
+     * provided by my tutor and lecturer for Programming 1A.
      */
+    
     @SuppressWarnings("unchecked")
     public void storeMessage() {
         JSONObject messageDetails = new JSONObject();
