@@ -308,5 +308,23 @@ public class ChatApp {
     System.out.println("----------------------------------------");
     System.out.println();
     }
+        private int getIntInput(String prompt) {
+        int number = 0;
+        boolean valid = false;
+
+        while (!valid) {
+            System.out.print(prompt);
+            String input = scanner.nextLine();
+
+            try {
+                number = Integer.parseInt(input);
+                valid = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input! Please enter a number.");
+            }
+        }
+
+        return number;
+    }
 }
 
