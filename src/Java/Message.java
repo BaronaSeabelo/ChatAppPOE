@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
+import org.json.simple.JSONObject;
 
 /**
  * Message Class - Handles all message-related functionality for Part 2.
@@ -196,36 +197,30 @@ public class Message {
         return totalMessagesSent;
     }
 
-    // METHOD 7: storeMessage() - Manual JSON
+        // METHOD 7: storeMessage() - JSON
     /**
-     * Stores the current message to a JSON file.
-     * Uses manual string building (no external libraries).
-     * 
-     * Reference: 
-     * SOURCE: https://stackoverflow.com/questions/4293586/how-to-write-json-in-java-without-any-library
-     * RETRIEVED: October 2026
+     * Stores the current message to messages.json using json-simple.
+     *
+     * SOURCE: json-simple 1.1 library (org.json.simple.JSONObject)
+     * Add your real source here (e.g. tutor session, documentation) and the date.
      */
+    @SuppressWarnings("unchecked")
     public void storeMessage() {
-        String json = "{\n" +
-                "  \"messageID\": \"" + messageID + "\",\n" +
-                "  \"messageNumber\": " + messageNumber + ",\n" +
-                "  \"recipient\": \"" + recipient + "\",\n" +
-                "  \"message\": \"" + escapeJson(messageText) + "\",\n" +
-                "  \"messageHash\": \"" + messageHash + "\"\n" +
-                "}\n";
+        JSONObject messageDetails = new JSONObject();
+        messageDetails.put("MessageID", messageID);
+        messageDetails.put("MessageNumber", messageNumber);
+        messageDetails.put("Recipient", recipient);
+        messageDetails.put("Message", messageText);
+        messageDetails.put("MessageHash", messageHash);
 
-        try {
-            // Append to messages.json
-            FileWriter fw = new FileWriter("messages.json", true);
-            PrintWriter pw = new PrintWriter(fw);
-            pw.println(json);
-            pw.close();
-            System.out.println("Message successfully stored");
+        try (FileWriter file = new FileWriter("messages.json", true)) {
+            file.write(messageDetails.toJSONString());
+            file.write("\n");
         } catch (IOException e) {
             System.out.println("Error storing message: " + e.getMessage());
         }
     }
-
+    
     // HELPER: Generate Message ID
     /**
      * Generates a random 10-digit message ID.
