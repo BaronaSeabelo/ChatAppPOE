@@ -77,7 +77,6 @@ public class ChatApp {
         System.out.println("========================================");
         System.out.println();
 
-        
         String username;
         do {
             System.out.print("Enter username: ");
@@ -91,7 +90,7 @@ public class ChatApp {
 
         System.out.println();
 
-        //Password validate immediately, loop until valid
+        // Password: validate immediately, loop until valid
         String password;
         do {
             System.out.print("Enter password: ");
@@ -105,7 +104,7 @@ public class ChatApp {
 
         System.out.println();
 
-        // Phone number validate immediately, loop until the input is  valid 
+        // Phone number: validate immediately, loop until valid
         String phoneNumber;
         do {
             System.out.print("Enter cell phone number: ");
@@ -119,7 +118,7 @@ public class ChatApp {
 
         System.out.println();
 
-        //first and last name no rules on he formating of the names 
+        // First and last name: no formatting rules
         System.out.print("Enter your first name: ");
         String firstName = scanner.nextLine();
 
@@ -129,7 +128,6 @@ public class ChatApp {
         System.out.println();
         System.out.println("----------------------------------------");
 
-        
         String result = login.registerUser(username, password, phoneNumber,
                                            firstName, lastName);
 
@@ -177,7 +175,6 @@ public class ChatApp {
         // Call Login's loginUser method to verify
         boolean isAuthenticated = login.loginUser(username, password);
 
-        // Display this message
         if (isAuthenticated) {
             String firstName = login.getFirstName();
             String lastName = login.getLastName();
@@ -185,12 +182,123 @@ public class ChatApp {
                                " it is great to see you.");
             System.out.println();
             System.out.println("Login successful! You are now logged in.");
+            System.out.println();
+            System.out.println("----------------------------------------");
+            System.out.println();
+
+            quickChatMenu();
         } else {
             System.out.println("Username or password incorrect, please try again.");
+            System.out.println();
+            System.out.println("----------------------------------------");
+            System.out.println();
         }
-       
-        // meant to organise and make the dispaly neater perosnal reasons 
+    }
+
+    // QuickChat messaging menu (after login)
+    public void quickChatMenu() {
+        System.out.println("========================================");
+        System.out.println("Welcome to QuickChat.");
+        System.out.println("========================================");
         System.out.println();
+
+        int choice = 0;
+
+        // Keep showing the QuickChat menu until the user chooses Quit
+        while (choice != 3) {
+            System.out.println("1) Send Messages");
+            System.out.println("2) Show recently sent messages");
+            System.out.println("3) Quit");
+            System.out.println("========================================");
+
+            choice = getIntInput("Enter your choice: ");
+
+            switch (choice) {
+                case 1:
+                    sendMessages();
+                    break;
+                case 2:
+                    System.out.println();
+                    System.out.println("Coming Soon.");
+                    System.out.println();
+                    break;
+                case 3:
+                    System.out.println();
+                    System.out.println("Exiting QuickChat. Goodbye!");
+                    System.out.println();
+                    break;
+                default:
+                    System.out.println();
+                    System.out.println("Invalid choice! Please enter 1, 2, or 3.");
+                    System.out.println();
+            }
+        }
+    }
+
+    // Asks how many messages to send, then loops that many times
+    // letting the user enter and process each message.
+    private void sendMessages() {
+        System.out.println();
+        int numMessages = getIntInput("How many messages would you like to send? ");
+        System.out.println();
+
+        for (int i = 0; i < numMessages; i++) {
+            System.out.println("----------------------------------------");
+            System.out.println("Message " + (i + 1) + " of " + numMessages);
+            System.out.println("----------------------------------------");
+
+            // Recipient: loop until valid
+            String recipient = "";
+            boolean validRecipient = false;
+            while (!validRecipient) {
+                System.out.print("Enter recipient cell number (international code): ");
+                recipient = scanner.nextLine();
+
+                String check = new Message(recipient, "test", i).checkRecipientCell();
+                System.out.println(check);
+
+                if (check.equals("Cell phone number successfully captured.")) {
+                    validRecipient = true;
+                }
+            }
+
+            // Message: loop until 250 characters or fewer
+            String messageText = "";
+            boolean validMessage = false;
+            while (!validMessage) {
+                System.out.print("Enter message (max 250 characters): ");
+                messageText = scanner.nextLine();
+
+                String lengthCheck = new Message(recipient, messageText, i).checkMessageLength();
+                System.out.println(lengthCheck);
+
+                if (lengthCheck.equals("Message ready to send.")) {
+                    validMessage = true;
+                }
+            }
+
+            // Constructor auto-generates the ID and hash; i is the message number
+            Message message = new Message(recipient, messageText, i);
+
+            System.out.println();
+            System.out.println(message.messageIDGenerated());
+            System.out.println("Message ID: " + message.getMessageID());
+            System.out.println("Message Hash: " + message.getMessageHash());
+            System.out.println("Recipient: " + message.getRecipient());
+            System.out.println("Message: " + message.getMessageText());
+            System.out.println();
+
+            System.out.println("1) Send Message");
+            System.out.println("2) Disregard Message");
+            System.out.println("3) Store Message to send later");
+            int action = getIntInput("Choose an option: ");
+
+            System.out.println(message.SentMessage(action));
+            System.out.println();
+        }
+
+        System.out.println("----------------------------------------");
+        System.out.println("Total messages sent: " + Message.getTotalMessagesSent());
         System.out.println("----------------------------------------");
         System.out.println();
     }
