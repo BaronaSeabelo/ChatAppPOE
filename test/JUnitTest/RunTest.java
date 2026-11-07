@@ -10,7 +10,7 @@ import org.junit.runner.notification.Failure;
 
 public class RunTest {
     public static void main(String[] args) {
-        Result result = JUnitCore.runClasses(LoginTest.class, MessageTest.class);
+        Result result = JUnitCore.runClasses(TestLogin.class, MessageTest.class);
 
         for (Failure failure : result.getFailures()) {
             System.out.println("FAILED: " + failure);
