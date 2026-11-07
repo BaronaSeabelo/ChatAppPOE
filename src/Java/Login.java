@@ -78,7 +78,7 @@ public class Login {
             }
         }
 
-        // Condition 4 Contains a special character
+        // Condition 4 Contains a special character.
         boolean hasSpecial = false;
         String specialCharacters = "!@#$%^&*()_+-=[]{};:'\"\\|,<.>/?";
         for (int i = 0; i < password.length(); i++) {
